@@ -1,0 +1,158 @@
+/* Login Page - Exact replica from newgame */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cinzel', serif;
+  background: url('/nen.png') center/cover no-repeat;
+  min-height: 100vh;
+}
+
+.login-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-page {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BANNER */
+.login-page .banner {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.login-page .banner-img {
+  width: 100%;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* TEXT IN BANNER */
+.login-page .banner h2 {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  color: #5a3b22;
+  letter-spacing: 3px;
+  font-family: 'Cinzel', serif;
+  margin: 0;
+}
+
+/* FORM */
+.login-page .form-container {
+  width: 360px;
+  margin-top: -80px;
+}
+
+/* FORM BOX */
+.login-page .form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* INPUT */
+.login-page input {
+  padding: 12px;
+  border-radius: 30px;
+  border: 2px solid #7a5b3e;
+  background: rgba(255, 255, 255, 0.35);
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.login-page input:focus {
+  border-color: #5a3b22;
+  box-shadow: 0 0 6px rgba(90, 59, 34, 0.5);
+}
+
+.login-page input::placeholder {
+  color: #666;
+}
+
+/* BUTTON */
+.login-page button {
+  padding: 12px;
+  border-radius: 30px;
+  background: #5a3b22;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  font-family: 'Cinzel', serif;
+}
+
+.login-page button:hover {
+  background: #7a5230;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(90, 59, 34, 0.6);
+}
+
+.login-page button:disabled {
+  background: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* SWITCH */
+.login-page .switch {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #5a3b22;
+}
+
+.login-page .switch a {
+  color: #5a3b22;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* ERROR */
+.login-page .error-msg {
+  color: #d00;
+  font-size: 12px;
+  text-align: center;
+  padding: 5px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .login-page .banner {
+    max-width: 90%;
+    margin-bottom: 40px;
+  }
+  
+  .login-page .form-container {
+    width: 85%;
+    margin-top: -50px;
+  }
+  
+  .login-page .banner h2 {
+    font-size: 28px;
+  }
+}

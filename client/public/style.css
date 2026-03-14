@@ -1,0 +1,246 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Cinzel',serif;
+
+/* nền parchment */
+
+background:url("/images/nen.png") center/cover no-repeat;
+
+min-height:100vh;
+
+}
+
+
+/* SECTION */
+
+.auth{
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+padding-top:20px;
+
+}
+
+
+/* BANNER */
+
+.banner{
+
+position:relative;
+
+width:100%;
+max-width:900px;
+
+display:flex;
+justify-content:center;
+
+margin-bottom:60px;
+
+}
+
+
+/* IMAGE */
+
+.banner-img{
+
+width:100%;
+
+pointer-events:none;
+
+/* giúp hòa vào nền */
+
+mix-blend-mode:multiply;
+
+}
+
+
+/* TEXT TRONG BANNER */
+
+.banner h2{
+
+position:absolute;
+
+top:52%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:36px;
+
+color:#5a3b22;
+
+letter-spacing:3px;
+
+}
+
+
+/* FORM */
+
+.form-container{
+
+width:360px;
+margin-top: -80px;
+
+}
+
+
+/* FORM BOX */
+
+.form-box{
+
+display:flex;
+flex-direction:column;
+
+gap:14px;
+
+}
+
+
+/* INPUT */
+
+input{
+
+padding:12px;
+
+border-radius:30px;
+
+border:2px solid #7a5b3e;
+
+background:rgba(255,255,255,0.35);
+
+font-size:15px;
+
+outline:none;
+
+transition:0.3s;
+
+}
+
+input:focus{
+
+border-color:#5a3b22;
+
+box-shadow:0 0 6px rgba(90,59,34,0.5);
+
+}
+
+
+/* BUTTON */
+
+button{
+
+padding:12px;
+
+border-radius:30px;
+
+background:#5a3b22;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#7a5230;
+
+transform:scale(1.05);
+
+box-shadow:0 0 10px rgba(90,59,34,0.6);
+
+}
+
+
+/* SWITCH */
+
+.switch{
+
+text-align:center;
+
+font-size:14px;
+
+margin-top:6px;
+
+}
+
+.switch a{
+
+color:#5a3b22;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+/* REGISTER HIDDEN */
+
+#registerForm{
+
+display:none;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.banner{
+
+max-width:90%;
+
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+}
+
+.form-container{
+
+width:90%;
+
+}
+
+.banner h2{
+
+font-size:28px;
+
+}
+
+body {
+  background:url("/images/nen.png") center/cover no-repeat;
+  min-height:100vh;
+  min-height: 100dvh;
+}
+
+.auth {
+  padding: 20px 10px;
+}
+
+}
+
+.error {
+  color: #d00;
+  font-size: 12px;
+  text-align: center;
+  margin: 5px 0;
+}

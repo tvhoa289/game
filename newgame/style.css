@@ -1,0 +1,310 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#e6e1d9;
+font-family:serif;
+scroll-behavior:smooth;
+}
+
+/* PAGE */
+
+.page{
+width:100%;
+overflow:hidden;
+}
+
+/* ALL IMAGE SECTIONS */
+
+.page img{
+width:100%;
+display:block;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+}
+
+/* START GAME BUTTON */
+
+.start-game{
+
+position:absolute;
+
+bottom:22%;
+left:50%;
+
+transform:translateX(-50%);
+
+padding:14px 60px;
+
+font-size:18px;
+
+font-family:serif;
+
+color:white;
+
+background:linear-gradient(#6b4327,#4a2f1c);
+
+border:none;
+
+border-radius:40px;
+
+letter-spacing:2px;
+
+cursor:pointer;
+
+box-shadow:
+0 4px 10px rgba(0,0,0,0.3),
+inset 0 1px 2px rgba(255,255,255,0.2);
+
+transition:all .2s ease;
+
+}
+
+/* HOVER */
+
+.start-game:hover{
+
+background:linear-gradient(#7a5230,#5a3b22);
+
+transform:translateX(-50%) scale(1.05);
+
+}
+
+/* CLICK */
+
+.start-game:active{
+
+transform:translateX(-50%) scale(0.97);
+
+}
+
+/* VIDEO SECTION */
+
+.video-section{
+
+display:flex;
+justify-content:center;
+
+padding:80px 20px;
+
+background:black;
+
+}
+
+/* VIDEO PLAYER */
+
+.video-section iframe{
+
+width:80%;
+max-width:900px;
+
+aspect-ratio:16/9;
+
+border:none;
+
+}
+
+/* LOGIN SECTION */
+
+.auth{
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+padding:120px 20px;
+
+background:url("images/nen.png") center/cover no-repeat;
+
+}
+
+/* BANNER */
+
+.banner{
+
+position:relative;
+
+max-width:900px;
+
+margin-bottom:50px;
+
+}
+
+/* BANNER IMAGE */
+
+.banner-img{
+
+width:100%;
+
+}
+
+/* LOGIN / REGISTER TEXT */
+
+.banner h2{
+
+position:absolute;
+
+top:55%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:40px;
+
+letter-spacing:4px;
+
+color:#5a3b22;
+
+font-family:'Cinzel',serif;
+
+text-shadow:
+1px 1px 0 #fff,
+2px 2px 4px rgba(0,0,0,0.3);
+
+}
+
+/* FORM CONTAINER */
+
+.form-container{
+
+width:360px;
+
+}
+
+/* FORM */
+
+.form-box{
+
+display:flex;
+flex-direction:column;
+
+gap:14px;
+
+}
+
+/* INPUT */
+
+.form-box input{
+
+padding:12px;
+
+border-radius:30px;
+
+border:2px solid #7a5b3e;
+
+background:rgba(255,255,255,0.35);
+
+font-size:15px;
+
+outline:none;
+
+transition:0.3s;
+
+}
+
+/* INPUT FOCUS */
+
+.form-box input:focus{
+
+border-color:#5a3b22;
+
+box-shadow:0 0 6px rgba(90,59,34,0.5);
+
+}
+
+/* BUTTON */
+
+.form-box button{
+
+padding:12px;
+
+border-radius:30px;
+
+background:#5a3b22;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:0.3s;
+
+}
+
+/* BUTTON HOVER */
+
+.form-box button:hover{
+
+background:#7a5230;
+
+transform:scale(1.05);
+
+}
+
+/* SWITCH LOGIN REGISTER */
+
+.switch{
+
+text-align:center;
+
+font-size:14px;
+
+margin-top:6px;
+
+}
+
+.switch a{
+
+color:#5a3b22;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+/* REGISTER HIDDEN */
+
+#registerForm{
+
+display:none;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.start-game{
+padding:12px 40px;
+font-size:16px;
+}
+
+.video-section iframe{
+width:95%;
+}
+
+.banner{
+max-width:90%;
+}
+
+.form-container{
+width:90%;
+}
+
+.banner h2{
+font-size:30px;
+}
+
+}

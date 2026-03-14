@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grey Dimension</title>
+
+<script>
+  window.VITE_API_URL = 'http://192.168.1.4:3001/api'; // Default, can be changed
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
+
+<style>
+@font-face {
+  font-family: 'iCielBCAppareo';
+  src: url('/fonts/iCielBCAppareo-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ImFellDoublePica';
+  src: url('/fonts/SVN-ImFellDoublePica-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ImFellDoublePica';
+  src: url('/fonts/SVN-ImFellDoublePica-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Anaktoria';
+  src: url('/fonts/SVN-Anaktoria.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
+
+</head>
+
+<body>
+
+<section class="auth">
+
+<!-- BANNER -->
+
+<div class="banner">
+
+<img src="images/banner.png" class="banner-img">
+
+<h2 id="formTitle">Register</h2>
+
+</div>
+
+<!-- LOGIN -->
+
+<form id="loginForm" class="form-box">
+
+<input name="username" id="loginUsername" placeholder="Username" required>
+
+<input type="password" name="password" id="loginPassword" placeholder="Password" required>
+
+<p id="loginError" class="error"></p>
+
+<button type="submit">Enter</button>
+
+<p class="switch">
+Don't have an account?
+<a onclick="showRegister()">Register now</a>
+</p>
+
+</form>
+
+
+<!-- REGISTER -->
+
+<form id="registerForm" class="form-box">
+
+<input name="username" id="regUsername" placeholder="Username" required>
+
+<input name="email" type="email" id="regEmail" placeholder="Email" required>
+
+<input name="phone" id="regPhone" placeholder="Phone">
+
+<input type="password" name="password" id="regPassword" placeholder="Password" required>
+
+<input name="confirm_password" type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+
+<p id="regError" class="error"></p>
+
+<button type="submit">Register</button>
+
+<p class="switch">
+Already have an account?
+<a onclick="showLogin()">Login</a>
+</p>
+
+</form>
+
+</div>
+
+</section>
+
+
+<script>
+const API_URL = window.VITE_API_URL || '/api';
+
+// Check if already logged in (simple check - just look for token)
+const checkLogin = () => {
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+  if (token && user) {
+    // Already logged in, redirect
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get('redirect') || '/';
+    window.location.href = redirect;
+    return true;
+  }
+  return false;
+};
+
+// Show register form by default
+window.addEventListener('DOMContentLoaded', function() {
+  const isLoggedIn = checkLogin();
+  if (!isLoggedIn) {
+    showRegister();
+  }
+});
+
+function showRegister(){
+document.getElementById("loginForm").style.display="none"
+document.getElementById("registerForm").style.display="flex"
+document.getElementById("formTitle").innerText="Register"
+}
+
+function showLogin(){
+document.getElementById("loginForm").style.display="flex"
+document.getElementById("registerForm").style.display="none"
+document.getElementById("formTitle").innerText="Login"
+}
+
+// Login
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  const errorEl = document.getElementById('loginError');
+  
+  errorEl.textContent = '';
+  
+  try {
+    const res = await fetch(API_URL + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: username, password })
+    });
+    
+    const data = await res.json();
+    
+    if (data.token) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      // Get redirect URL from query params, default to /
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect') || '/';
+      window.location.href = redirect;
+    } else {
+      errorEl.textContent = data.error || 'Login failed';
+    }
+  } catch (err) {
+    errorEl.textContent = 'Login failed';
+  }
+});
+
+// Register
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('regUsername').value;
+  const email = document.getElementById('regEmail').value;
+  const phone = document.getElementById('regPhone').value;
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+  const errorEl = document.getElementById('regError');
+  
+  errorEl.textContent = '';
+  
+  if (password !== confirmPassword) {
+    errorEl.textContent = 'Passwords do not match';
+    return;
+  }
+  
+  try {
+    const res = await fetch(API_URL + '/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, phone, password })
+    });
+    
+    const data = await res.json();
+    
+    if (data.user) {
+      alert('Registration successful! Please login.');
+      showLogin();
+    } else {
+      errorEl.textContent = data.error || 'Registration failed';
+    }
+  } catch (err) {
+    errorEl.textContent = 'Registration failed';
+  }
+});
+</script>
+
+</body>
+</html>
