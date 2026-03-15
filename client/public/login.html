@@ -4,12 +4,21 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#5a3b22">
 
 <title>Grey Dimension</title>
 
 <script>
-  window.VITE_API_URL = 'http://192.168.1.4:3001/api'; // Default, can be changed
+  // Try to get API URL from environment or use default
+  window.VITE_API_URL = 'http://192.168.1.4:3001/api';
+  // Or try to detect from current host
+  if (window.location.hostname !== 'localhost') {
+    // For mobile, use relative path which will use same domain
+    window.VITE_API_URL = '/api';
+  }
 </script>
 
 <link rel="stylesheet" href="style.css">
@@ -53,7 +62,7 @@
 
 <div class="banner">
 
-<img src="images/banner.png" class="banner-img">
+<img src="/images/banner.png" class="banner-img">
 
 <h2 id="formTitle">Register</h2>
 
@@ -156,7 +165,8 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   errorEl.textContent = '';
   
   try {
-    const res = await fetch(API_URL + '/auth/login', {
+    const apiUrl = window.VITE_API_URL || '/api';
+    const res = await fetch(apiUrl + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: username, password })
@@ -167,15 +177,14 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     if (data.token) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
-      // Get redirect URL from query params, default to /
       const urlParams = new URLSearchParams(window.location.search);
       const redirect = urlParams.get('redirect') || '/';
       window.location.href = redirect;
     } else {
-      errorEl.textContent = data.error || 'Login failed';
+      errorEl.textContent = data.error || 'Invalid username or password';
     }
   } catch (err) {
-    errorEl.textContent = 'Login failed';
+    errorEl.textContent = 'Cannot connect to server. Check your connection.';
   }
 });
 

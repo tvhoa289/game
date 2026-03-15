@@ -117,6 +117,7 @@ const Landing = () => {
               />
             ))}
           </div>
+          <p className="greyd-text">GREYD</p>
         </div>
       ) : (
         <img src="/section3.png" alt="Section 3" className="section-img" />
@@ -134,9 +135,9 @@ const Landing = () => {
             <p className="date-text">{formatDate(user.created_at)}</p>
           </div>
         ) : (
-          <div className="user-info-overlay">
-            <p className="progress">0/13</p>
-            <p className="unlocked-text">lock</p>
+          <div className="guest-info-overlay">
+            <p className="guest-progress">0/13</p>
+            <p className="guest-lock">lock</p>
           </div>
         )}
       </div>
