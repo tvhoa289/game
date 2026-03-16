@@ -1389,27 +1389,43 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  /* Hero - Force override */
-  .hero { width: 100%; }
-  .hero img { width: 100%; height: auto; display: block; }
+  /* Hero - Section1 fit theo noi dung */
+  .hero { 
+    width: 100%; 
+    height: auto;
+    position: relative;
+  }
+  .hero img { 
+    width: 100% !important; 
+    height: auto !important; 
+    display: block;
+    object-fit: contain !important;
+  }
   .hero-text-overlay { 
-    top: 73% !important; 
+    position: absolute;
+    top: 63% !important;
     width: 95% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     padding: 5px !important;
+    text-align: center;
   }
   .hero-text-overlay p { 
-    font-size: 0.49rem !important; 
-    line-height: 1.2 !important;
-    padding: 0.5px 0 !important;
+    font-size: 0.4rem !important; 
+    line-height: 0.8 !important;
+    padding: 2px 0 !important;
   }
   .hero-text-overlay .hero-highlight { 
-    font-size: 0.45rem !important; 
+    font-size: 0.4rem !important; 
     margin-top: 5px !important; 
   }
   .start-game { 
-    padding: 5px 80px !important; 
+    position: absolute;
+    bottom: 0% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 2px 60px !important; 
     font-size: 6px !important; 
-    bottom: 15% !important;
   }
   
   /* Hero user actions */

@@ -135,7 +135,23 @@ const Landing = () => {
           </div>
         </div>
       ) : (
-        <img src="/section4.png" alt="Section 4" className="section-img" />
+        <div className="section4-wrap">
+          <img src="/section4.png" alt="Section 4" className="section-img" />
+          {user ? (
+            <div className="user-info-overlay">
+              <p className="username">@{user.username}</p>
+              <p className="progress">{user.unlocked_count || 0}/13</p>
+              <p className="unlocked-text">unlocked</p>
+              <p className="time-text">{formatTime(currentTime)}</p>
+              <p className="date-text">{formatDate(user.created_at)}</p>
+            </div>
+          ) : (
+            <div className="guest-info-overlay">
+              <p className="guest-progress">0/13</p>
+              <p className="guest-lock">lock</p>
+            </div>
+          )}
+        </div>
       )}
 
       <img src="/section5.png" alt="Section 5" className="section-img" />
