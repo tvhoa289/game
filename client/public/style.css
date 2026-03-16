@@ -4,263 +4,251 @@ padding:0;
 box-sizing:border-box;
 }
 
-html, body {
-  min-height: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-}
-
 body{
-
 font-family:'Cinzel',serif;
-
-/* nền parchment */
-
-background:url("/images/nen.png") center/cover no-repeat;
-background-attachment: fixed;
-
 min-height:100vh;
-min-height: 100dvh;
-
+min-height:100dvh;
+overflow-x:hidden;
 }
 
-
-/* SECTION */
+/* ================= */
+/* PAGE */
+/* ================= */
 
 .auth{
-
-display:flex;
-flex-direction:column;
-
-align-items:center;
-
-padding-top:20px;
-
-min-height: 100vh;
-min-height: 100dvh;
-
-}
-
-
-/* BANNER */
-
-.banner{
-
-position:relative;
+min-height:100vh;
+min-height:100dvh;
 
 width:100%;
-max-width:900px;
 
 display:flex;
+align-items:center;
 justify-content:center;
 
-margin-bottom:60px;
-
+position:relative;
 }
 
+/* ================= */
+/* DESKTOP BACKGROUND */
+/* ================= */
 
-/* IMAGE */
-
-.banner-img{
-
-width:100%;
-
-pointer-events:none;
-
-/* giúp hòa vào nền */
-
-mix-blend-mode:multiply;
-
-}
-
-
-/* TEXT TRONG BANNER */
-
-.banner h2{
-
+.banner{
 position:absolute;
 
-top:52%;
-left:50%;
+top:0;
+left:0;
 
+width:100%;
+height:100vh;
+height:100dvh;
+
+z-index:-1;
+}
+
+.bg-image{
+width:100%;
+height:100%;
+
+object-fit:cover;
+object-position:center top;
+}
+
+/* ================= */
+/* TITLE */
+/* ================= */
+
+.banner h2{
+position:absolute;
+
+left:50%;
 transform:translate(-50%,-50%);
 
-font-size:36px;
+font-size:42px;
+letter-spacing:4px;
 
 color:#5a3b22;
-
-letter-spacing:3px;
-
 }
 
-
+/* ================= */
 /* FORM */
+/* ================= */
 
 .form-container{
-
-width:360px;
-margin-top: -80px;
-
+width:380px;
 }
-
-
-/* FORM BOX */
 
 .form-box{
-
 display:flex;
 flex-direction:column;
-
-gap:14px;
-
+gap:12px;
 }
-
 
 /* INPUT */
 
 input{
-
 padding:12px;
 
-border-radius:30px;
+border-radius:25px;
 
 border:2px solid #7a5b3e;
 
-background:rgba(255,255,255,0.35);
+background:rgba(255,255,255,0.45);
 
-font-size:15px;
+font-size:14px;
 
 outline:none;
-
-transition:0.3s;
-
 }
-
-input:focus{
-
-border-color:#5a3b22;
-
-box-shadow:0 0 6px rgba(90,59,34,0.5);
-
-}
-
 
 /* BUTTON */
 
 button{
-
 padding:12px;
 
-border-radius:30px;
+border-radius:25px;
+
+border:none;
 
 background:#5a3b22;
 
 color:white;
 
-border:none;
-
 cursor:pointer;
 
-font-size:16px;
+font-size:15px;
 
-transition:0.3s;
-
+transition:0.2s;
 }
 
 button:hover{
-
 background:#7a5230;
-
 transform:scale(1.05);
-
-box-shadow:0 0 10px rgba(90,59,34,0.6);
-
 }
-
 
 /* SWITCH */
 
 .switch{
-
 text-align:center;
-
 font-size:14px;
-
-margin-top:6px;
-
+color:#5a3b22;
 }
 
 .switch a{
-
-color:#5a3b22;
-
 font-weight:bold;
-
 cursor:pointer;
-
 }
 
-
-/* REGISTER HIDDEN */
+/* HIDE REGISTER */
 
 #registerForm{
-
 display:none;
-
 }
 
+/* ================= */
+/* LOGIN POSITION */
+/* ================= */
 
+.login-mode .banner h2{
+top:36%;
+}
+
+.login-mode .form-container{
+margin-top:200px;
+}
+
+/* ================= */
+/* REGISTER POSITION */
+/* ================= */
+
+.register-mode .banner h2{
+top:25%;
+}
+
+.register-mode .form-container{
+margin-top:180px;
+}
+
+/* ================= */
 /* MOBILE */
+/* ================= */
+
+/* ================= */
+/* MOBILE FIX */
+/* ================= */
 
 @media(max-width:768px){
 
-html, body {
-  min-height: 100%;
-  min-height: 100dvh;
+body{
+background:url("/images/nen.png") center/cover no-repeat;
+background-attachment:scroll;
 }
+
+.auth{
+flex-direction:column;
+justify-content:flex-start;
+padding-top:40px;
+}
+
+/* banner */
 
 .banner{
-
-max-width:90%;
-
+position:relative;
+width:100%;
+height:auto;
+margin-bottom:20px;
 }
 
-.banner img {
-  width: 100%;
-  height: auto;
+/* banner image */
+
+.bg-image{
+content:url("/images/banner.png");
+width:100%;
+height:auto;
+display:block;
 }
 
-.form-container{
+/* title */
 
+.login-mode .banner h2{
+top:52%;
+font-size:14px;
+}
+
+.register-mode .banner h2{
+top:52%;
+font-size:14px;
+}
+
+/* form */
+
+.login-mode .form-container{
 width:90%;
-margin-top: -50px;
+max-width:360px;
+margin-top:-10px;
+}
+
+.register-mode .form-container{
+width:90%;
+max-width:360px;
+margin-top:-10px;
+}
+
+
+/* input */
+
+input{
+
+padding:14px;
+font-size:15px;
 
 }
 
-.banner h2{
+/* button */
 
-font-size:22px;
+button{
 
-}
-
-body {
-  background:url("/images/nen.png") center/cover no-repeat !important;
-  background-attachment: fixed !important;
-  min-height:100vh !important;
-  min-height: 100dvh !important;
-}
-
-.auth {
-  padding: 20px 10px;
-  min-height: 100vh;
-  min-height: 100dvh;
-}
+padding:14px;
+font-size:15px;
 
 }
 
-.error {
-  color: #d00;
-  font-size: 12px;
-  text-align: center;
-  margin: 5px 0;
 }

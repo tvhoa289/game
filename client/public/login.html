@@ -4,85 +4,50 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#5a3b22">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Grey Dimension</title>
-
-<script>
-  // Try to get API URL from environment or use default
-  window.VITE_API_URL = 'http://192.168.1.4:3001/api';
-  // Or try to detect from current host
-  if (window.location.hostname !== 'localhost') {
-    // For mobile, use relative path which will use same domain
-    window.VITE_API_URL = '/api';
-  }
-</script>
 
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
 
-<style>
-@font-face {
-  font-family: 'iCielBCAppareo';
-  src: url('/fonts/iCielBCAppareo-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'ImFellDoublePica';
-  src: url('/fonts/SVN-ImFellDoublePica-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'ImFellDoublePica';
-  src: url('/fonts/SVN-ImFellDoublePica-Italic.otf') format('opentype');
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Anaktoria';
-  src: url('/fonts/SVN-Anaktoria.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-</style>
-
 </head>
 
-<body>
+<body class="login-mode">
 
 <section class="auth">
 
-<!-- BANNER -->
+<!-- BANNER / BACKGROUND -->
 
 <div class="banner">
 
-<img src="/images/banner.png" class="banner-img">
+<img id="bgImage" class="bg-image" src="images/login.png" alt="Banner">
 
-<h2 id="formTitle">Register</h2>
+<h2 id="formTitle">LOGIN</h2>
 
 </div>
 
+
+<!-- FORM AREA -->
+
+<div class="form-container">
+
 <!-- LOGIN -->
 
-<form id="loginForm" class="form-box">
+<form id="loginForm" class="form-box" action="/login" method="POST">
 
-<input name="username" id="loginUsername" placeholder="Username" required>
+<input name="username" placeholder="Username" required>
 
-<input type="password" name="password" id="loginPassword" placeholder="Password" required>
+<input type="password" name="password" placeholder="Password" required>
 
-<p id="loginError" class="error"></p>
+<p class="error" id="loginError"></p>
 
-<button type="submit">Enter</button>
+<button type="submit">ENTER</button>
 
 <p class="switch">
 Don't have an account?
-<a onclick="showRegister()">Register now</a>
+<a onclick="showRegister()">Register</a>
 </p>
 
 </form>
@@ -90,21 +55,21 @@ Don't have an account?
 
 <!-- REGISTER -->
 
-<form id="registerForm" class="form-box">
+<form id="registerForm" class="form-box" action="/register" method="POST">
 
-<input name="username" id="regUsername" placeholder="Username" required>
+<input name="username" placeholder="Username" required>
 
-<input name="email" type="email" id="regEmail" placeholder="Email" required>
+<input name="email" type="email" placeholder="Email" required>
 
-<input name="phone" id="regPhone" placeholder="Phone">
+<input name="phone" placeholder="Phone">
 
-<input type="password" name="password" id="regPassword" placeholder="Password" required>
+<input name="password" type="password" placeholder="Password" required>
 
-<input name="confirm_password" type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+<input name="confirm_password" type="password" placeholder="Confirm Password" required>
 
-<p id="regError" class="error"></p>
+<p class="error" id="regError"></p>
 
-<button type="submit">Register</button>
+<button type="submit">REGISTER</button>
 
 <p class="switch">
 Already have an account?
@@ -118,112 +83,174 @@ Already have an account?
 </section>
 
 
+
 <script>
-const API_URL = window.VITE_API_URL || '/api';
 
-// Check if already logged in (simple check - just look for token)
-const checkLogin = () => {
-  const token = localStorage.getItem('token');
-  const user = localStorage.getItem('user');
-  if (token && user) {
-    // Already logged in, redirect
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirect = urlParams.get('redirect') || '/';
-    window.location.href = redirect;
-    return true;
-  }
-  return false;
-};
+/* ========================= */
+/* API URL */
+/* ========================= */
 
-// Show register form by default
-window.addEventListener('DOMContentLoaded', function() {
-  const isLoggedIn = checkLogin();
-  if (!isLoggedIn) {
-    showRegister();
-  }
+const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '192.168.1.8')
+  ? 'http://192.168.1.8:3001/api' 
+  : '/api';
+
+/* ========================= */
+/* CHECK LOGIN */
+/* ========================= */
+
+const token = localStorage.getItem('token');
+
+if (token) {
+  window.location.href = '/?loggedin=true';
+}
+
+
+/* ========================= */
+/* LOGIN */
+/* ========================= */
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+
+e.preventDefault();
+
+const username = e.target.username.value;
+const password = e.target.password.value;
+
+const errorEl = document.getElementById('loginError');
+
+errorEl.textContent = '';
+
+try {
+
+const res = await fetch(API_URL + '/auth/login', {
+
+method:'POST',
+
+headers:{ 'Content-Type':'application/json' },
+
+body:JSON.stringify({ email: username, password })
+
 });
+
+const data = await res.json();
+
+if(data.token){
+
+localStorage.setItem('token', data.token);
+localStorage.setItem('user', JSON.stringify(data.user));
+
+window.location.href='/?loggedin=true';
+
+}else{
+
+errorEl.textContent=data.error || 'Invalid credentials';
+
+}
+
+}catch(err){
+
+errorEl.textContent='Cannot connect to server';
+
+}
+
+});
+
+
+/* ========================= */
+/* REGISTER */
+/* ========================= */
+
+document.getElementById('registerForm').addEventListener('submit', async (e)=>{
+
+e.preventDefault();
+
+const username=e.target.username.value;
+const email=e.target.email.value;
+const phone=e.target.phone.value;
+
+const password=e.target.password.value;
+const confirmPassword=e.target.confirm_password.value;
+
+const errorEl=document.getElementById('regError');
+
+errorEl.textContent='';
+
+if(password!==confirmPassword){
+
+errorEl.textContent='Passwords do not match';
+return;
+
+}
+
+try{
+
+const res=await fetch(API_URL+'/auth/register',{
+
+method:'POST',
+
+headers:{'Content-Type':'application/json'},
+
+body:JSON.stringify({username,email,phone,password})
+
+});
+
+const data=await res.json();
+
+if(data.token){
+
+localStorage.setItem('token',data.token);
+localStorage.setItem('user',JSON.stringify(data.user));
+
+window.location.href='/?loggedin=true';
+
+}else{
+
+errorEl.textContent=data.error || 'Registration failed';
+
+}
+
+}catch(err){
+
+errorEl.textContent='Cannot connect to server';
+
+}
+
+});
+
+
+/* ========================= */
+/* SWITCH FORM */
+/* ========================= */
 
 function showRegister(){
-document.getElementById("loginForm").style.display="none"
-document.getElementById("registerForm").style.display="flex"
-document.getElementById("formTitle").innerText="Register"
+
+document.body.classList.remove("login-mode");
+document.body.classList.add("register-mode");
+
+document.getElementById("loginForm").style.display="none";
+document.getElementById("registerForm").style.display="flex";
+
+document.getElementById("formTitle").innerText="REGISTER";
+
+document.getElementById("bgImage").src="images/register.png";
+
 }
+
 
 function showLogin(){
-document.getElementById("loginForm").style.display="flex"
-document.getElementById("registerForm").style.display="none"
-document.getElementById("formTitle").innerText="Login"
+
+document.body.classList.remove("register-mode");
+document.body.classList.add("login-mode");
+
+document.getElementById("loginForm").style.display="flex";
+document.getElementById("registerForm").style.display="none";
+
+document.getElementById("formTitle").innerText="LOGIN";
+
+document.getElementById("bgImage").src="images/login.png";
+
 }
 
-// Login
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const username = document.getElementById('loginUsername').value;
-  const password = document.getElementById('loginPassword').value;
-  const errorEl = document.getElementById('loginError');
-  
-  errorEl.textContent = '';
-  
-  try {
-    const apiUrl = window.VITE_API_URL || '/api';
-    const res = await fetch(apiUrl + '/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: username, password })
-    });
-    
-    const data = await res.json();
-    
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      const urlParams = new URLSearchParams(window.location.search);
-      const redirect = urlParams.get('redirect') || '/';
-      window.location.href = redirect;
-    } else {
-      errorEl.textContent = data.error || 'Invalid username or password';
-    }
-  } catch (err) {
-    errorEl.textContent = 'Cannot connect to server. Check your connection.';
-  }
-});
-
-// Register
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const username = document.getElementById('regUsername').value;
-  const email = document.getElementById('regEmail').value;
-  const phone = document.getElementById('regPhone').value;
-  const password = document.getElementById('regPassword').value;
-  const confirmPassword = document.getElementById('regConfirmPassword').value;
-  const errorEl = document.getElementById('regError');
-  
-  errorEl.textContent = '';
-  
-  if (password !== confirmPassword) {
-    errorEl.textContent = 'Passwords do not match';
-    return;
-  }
-  
-  try {
-    const res = await fetch(API_URL + '/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, phone, password })
-    });
-    
-    const data = await res.json();
-    
-    if (data.user) {
-      alert('Registration successful! Please login.');
-      showLogin();
-    } else {
-      errorEl.textContent = data.error || 'Registration failed';
-    }
-  } catch (err) {
-    errorEl.textContent = 'Registration failed';
-  }
-});
 </script>
 
 </body>

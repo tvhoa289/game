@@ -62,11 +62,12 @@ const Login = () => {
   return (
     <div className="login-page-wrapper">
       <div className="login-page">
-        <div className="banner">
-          <img src="/banner.png" className="banner-img" alt="Banner" />
+        {/* Title Frame */}
+        <div className="title-frame">
           <h2>{isRegister ? 'Register' : 'Login'}</h2>
         </div>
 
+        {/* Form Container */}
         <div className="form-container">
           {!isRegister ? (
             <form id="loginForm" className="form-box" onSubmit={handleLogin}>

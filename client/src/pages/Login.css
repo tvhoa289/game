@@ -1,4 +1,4 @@
-/* Login Page - Exact replica from newgame */
+/* Login Page - Using login.png background */
 
 * {
   margin: 0;
@@ -6,86 +6,77 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Cinzel', serif;
-  background: url('/nen.png') center/cover no-repeat;
-  min-height: 100vh;
-}
-
 .login-page-wrapper {
+  position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background: url('/images/login.png') center/cover no-repeat;
+  background-attachment: fixed;
 }
 
 .login-page {
+  position: relative;
+  z-index: 10;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* BANNER */
-.login-page .banner {
-  position: relative;
+/* Title Frame */
+.title-frame {
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #5a3b22;
+  border-radius: 15px;
+  padding: 12px 40px;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 900px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
+  text-align: center;
 }
 
-.login-page .banner-img {
-  width: 100%;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-
-/* TEXT IN BANNER */
-.login-page .banner h2 {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 36px;
+.title-frame h2 {
+  font-size: 28px;
   color: #5a3b22;
   letter-spacing: 3px;
-  font-family: 'Cinzel', serif;
   margin: 0;
+  text-align: center;
+  font-family: 'Cinzel', serif;
 }
 
-/* FORM */
-.login-page .form-container {
-  width: 360px;
-  margin-top: -80px;
+/* Form Container */
+.form-container {
+  width: 100%;
+  max-width: 320px;
 }
 
 /* FORM BOX */
-.login-page .form-box {
+.form-box {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #7a5b3e;
 }
 
 /* INPUT */
 .login-page input {
-  padding: 12px;
-  border-radius: 30px;
+  padding: 12px 15px;
+  border-radius: 25px;
   border: 2px solid #7a5b3e;
-  background: rgba(255, 255, 255, 0.35);
-  font-size: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
   outline: none;
   transition: 0.3s;
   width: 100%;
-}
-
-.login-page input:focus {
-  border-color: #5a3b22;
-  box-shadow: 0 0 6px rgba(90, 59, 34, 0.5);
 }
 
 .login-page input::placeholder {
@@ -94,21 +85,22 @@ body {
 
 /* BUTTON */
 .login-page button {
-  padding: 12px;
-  border-radius: 30px;
+  padding: 14px;
+  border-radius: 25px;
   background: #5a3b22;
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: bold;
   transition: 0.3s;
   font-family: 'Cinzel', serif;
+  width: 100%;
 }
 
 .login-page button:hover {
   background: #7a5230;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(90, 59, 34, 0.6);
+  transform: scale(1.02);
 }
 
 .login-page button:disabled {
@@ -120,8 +112,8 @@ body {
 /* SWITCH */
 .login-page .switch {
   text-align: center;
-  font-size: 14px;
-  margin-top: 6px;
+  font-size: 13px;
+  margin-top: 8px;
   color: #5a3b22;
 }
 
@@ -129,7 +121,7 @@ body {
   color: #5a3b22;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 5px;
+  text-decoration: underline;
 }
 
 /* ERROR */
@@ -137,22 +129,51 @@ body {
   color: #d00;
   font-size: 12px;
   text-align: center;
-  padding: 5px;
+  padding: 3px;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .login-page .banner {
-    max-width: 90%;
-    margin-bottom: 40px;
+  .login-page-wrapper {
+    min-height: auto;
+    min-height: 100dvh;
+    padding: 20px 15px;
+    background-attachment: scroll;
   }
-  
-  .login-page .form-container {
-    width: 85%;
-    margin-top: -50px;
+
+  .login-page {
+    max-width: 100%;
   }
-  
-  .login-page .banner h2 {
-    font-size: 28px;
+
+  .title-frame {
+    padding: 10px 30px;
+    margin-bottom: 15px;
+  }
+
+  .title-frame h2 {
+    font-size: 22px;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  .form-box {
+    padding: 18px 15px;
+    gap: 12px;
+  }
+
+  .login-page input {
+    padding: 14px 15px;
+    font-size: 15px;
+  }
+
+  .login-page button {
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .login-page .switch {
+    font-size: 13px;
   }
 }

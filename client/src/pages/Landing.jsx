@@ -78,7 +78,7 @@ const Landing = () => {
     <div className="page">
       <audio ref={audioRef} src="/win.mp3" />
       
-      {/* HERO */}
+      {/* SECTION 1 - Full View with Hero Text + START Button */}
       <section className="hero">
         <img src="/section1.png" alt="Hero" />
         <div className="hero-text-overlay">
@@ -100,9 +100,6 @@ const Landing = () => {
         )}
       </section>
 
-      {/* SECTION 2 - Mobile Only */}
-      <img src="/section2.png" alt="Section 2" className="section-img section2-mobile" />
-
       {/* SECTION 3 - MAP */}
       {user ? (
         <div className="map-section" ref={mapRef}>
@@ -117,7 +114,6 @@ const Landing = () => {
               />
             ))}
           </div>
-          <p className="greyd-text">GREYD</p>
         </div>
       ) : (
         <img src="/section3.png" alt="Section 3" className="section-img" />
@@ -143,7 +139,13 @@ const Landing = () => {
       </div>
 
       <img src="/section5.png" alt="Section 5" className="section-img" />
-      <img src="/section7.png" alt="Section 7" className="section-img" />
+
+      <div className="section7-wrap">
+        <a href="https://st319.vn/" target="_blank" rel="noopener noreferrer" className="stream-download-btn">
+          Stream&Download
+        </a>
+        <img src="/section7.png" alt="Section 7" className="section-img" />
+      </div>
 
       <div className="video-section">
         <iframe src="https://www.youtube.com/embed/2iidlwQ-NfU" title="Video" allowFullScreen></iframe>
