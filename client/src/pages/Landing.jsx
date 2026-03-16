@@ -93,6 +93,9 @@ const Landing = () => {
         {user ? (
           <div className="user-hero-actions">
             <span className="user-greeting">Welcome, {user.username}</span>
+            {user.role === 'admin' && (
+              <a href="/admin" className="admin-btn">Admin</a>
+            )}
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
         ) : (
@@ -119,30 +122,27 @@ const Landing = () => {
         <img src="/section3.png" alt="Section 3" className="section-img" />
       )}
 
-      {/* SECTION 4 */}
-      <div className="section4-wrap">
-        <img src="/section4.png" alt="Section 4" className="section-img" />
-        {user ? (
+      {/* SECTION 4 - Complete when 13/13 */}
+      {user && user.unlocked_count >= 13 ? (
+        <div className="sectioncomplete-wrap">
+          <img src="/sectioncomplete.png" alt="Section Complete" className="section-img" />
           <div className="user-info-overlay">
             <p className="username">@{user.username}</p>
             <p className="progress">{user.unlocked_count || 0}/13</p>
-            <p className="unlocked-text">unlocked</p>
+            <p className="unlocked-text">Completed</p>
             <p className="time-text">{formatTime(currentTime)}</p>
-            <p className="date-text">{formatDate(user.created_at)}</p>
+            <p className="date-text">{formatDate(user.completed_at || user.created_at)}</p>
           </div>
-        ) : (
-          <div className="guest-info-overlay">
-            <p className="guest-progress">0/13</p>
-            <p className="guest-lock">lock</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <img src="/section4.png" alt="Section 4" className="section-img" />
+      )}
 
       <img src="/section5.png" alt="Section 5" className="section-img" />
 
       <div className="section7-wrap">
         <a href="https://st319.vn/" target="_blank" rel="noopener noreferrer" className="stream-download-btn">
-          Stream&Download
+          Stream & Download
         </a>
         <img src="/section7.png" alt="Section 7" className="section-img" />
       </div>

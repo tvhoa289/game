@@ -12,9 +12,18 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
 
+<style>
+@font-face {
+  font-family: 'SVN-ImFellDoublePica-Italic';
+  src: url('/fonts/SVN-ImFellDoublePica-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+</style>
+
 </head>
 
-<body class="login-mode">
+<body class="register-mode">
 
 <section class="auth">
 
@@ -22,9 +31,9 @@
 
 <div class="banner">
 
-<img id="bgImage" class="bg-image" src="images/login.png" alt="Banner">
+<img id="bgImage" class="bg-image" src="images/register.png" alt="Banner">
 
-<h2 id="formTitle">LOGIN</h2>
+<h2 id="formTitle">Register</h2>
 
 </div>
 
@@ -230,7 +239,7 @@ document.body.classList.add("register-mode");
 document.getElementById("loginForm").style.display="none";
 document.getElementById("registerForm").style.display="flex";
 
-document.getElementById("formTitle").innerText="REGISTER";
+document.getElementById("formTitle").innerText="Register";
 
 document.getElementById("bgImage").src="images/register.png";
 
@@ -245,7 +254,7 @@ document.body.classList.add("login-mode");
 document.getElementById("loginForm").style.display="flex";
 document.getElementById("registerForm").style.display="none";
 
-document.getElementById("formTitle").innerText="LOGIN";
+document.getElementById("formTitle").innerText="Login";
 
 document.getElementById("bgImage").src="images/login.png";
 

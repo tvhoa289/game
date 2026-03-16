@@ -11,9 +11,7 @@ min-height:100dvh;
 overflow-x:hidden;
 }
 
-/* ================= */
 /* PAGE */
-/* ================= */
 
 .auth{
 min-height:100vh;
@@ -28,9 +26,7 @@ justify-content:center;
 position:relative;
 }
 
-/* ================= */
-/* DESKTOP BACKGROUND */
-/* ================= */
+/* BACKGROUND */
 
 .banner{
 position:absolute;
@@ -53,29 +49,31 @@ object-fit:cover;
 object-position:center top;
 }
 
-/* ================= */
 /* TITLE */
-/* ================= */
 
 .banner h2{
 position:absolute;
-
 left:50%;
+font-family:'SVN-ImFellDoublePica-Italic', serif;
 transform:translate(-50%,-50%);
-
-font-size:42px;
+font-size:58px;
 letter-spacing:4px;
 
 color:#5a3b22;
 }
 
-/* ================= */
 /* FORM */
-/* ================= */
 
 .form-container{
+
+position:absolute;
+left:50%;
+transform:translateX(-50%);
 width:380px;
+
 }
+
+/* FORM BOX */
 
 .form-box{
 display:flex;
@@ -87,15 +85,11 @@ gap:12px;
 
 input{
 padding:12px;
-
 border-radius:25px;
-
 border:2px solid #7a5b3e;
-
 background:rgba(255,255,255,0.45);
-
 font-size:14px;
-
+font-family:'iCielBCAppareo-Black',serif;
 outline:none;
 }
 
@@ -103,19 +97,13 @@ outline:none;
 
 button{
 padding:12px;
-
 border-radius:25px;
-
 border:none;
-
 background:#5a3b22;
-
 color:white;
-
 cursor:pointer;
-
 font-size:15px;
-
+font-family:'iCielBCAppareo-Black',serif;
 transition:0.2s;
 }
 
@@ -130,11 +118,13 @@ transform:scale(1.05);
 text-align:center;
 font-size:14px;
 color:#5a3b22;
+font-family:'iCielBCAppareo-Black',serif;
 }
 
 .switch a{
 font-weight:bold;
 cursor:pointer;
+font-family:'iCielBCAppareo-Black',serif;
 }
 
 /* HIDE REGISTER */
@@ -143,28 +133,34 @@ cursor:pointer;
 display:none;
 }
 
-/* ================= */
+/* REGISTER MODE */
+
+.register-mode #loginForm{
+display:none;
+}
+
+.register-mode #registerForm{
+display:flex;
+}
+
 /* LOGIN POSITION */
-/* ================= */
 
 .login-mode .banner h2{
 top:36%;
 }
 
 .login-mode .form-container{
-margin-top:200px;
+top:55%;
 }
 
-/* ================= */
 /* REGISTER POSITION */
-/* ================= */
 
 .register-mode .banner h2{
 top:25%;
 }
 
 .register-mode .form-container{
-margin-top:180px;
+top:40%;
 }
 
 /* ================= */
@@ -210,35 +206,57 @@ display:block;
 
 .login-mode .banner h2{
 top:52%;
-font-size:14px;
+font-size:18px;
 }
 
 .register-mode .banner h2{
 top:52%;
-font-size:14px;
+font-size:18px;
 }
 
 /* form */
 
+.login-mode .banner h2{
+top:52%;
+font-size:12px;
+}
+
+.register-mode .banner h2{
+top:52%;
+font-size:12px;
+}
 .login-mode .form-container{
-width:90%;
+position:absolute;
+top:30%;
+left:50%;
+transform:translateX(-50%);
+width:85%;
 max-width:360px;
-margin-top:-10px;
 }
 
 .register-mode .form-container{
-width:90%;
+position:absolute;
+top:30%;
+left:50%;
+transform:translateX(-50%);
+width:85%;
 max-width:360px;
-margin-top:-10px;
 }
 
+.form-box{
+display:flex;
+top:60%
+flex-direction:column;
+align-items:center;
+}
 
 /* input */
 
 input{
 
-padding:14px;
-font-size:15px;
+padding:8px;
+font-size:8px;
+width:70%;
 
 }
 
@@ -246,8 +264,10 @@ font-size:15px;
 
 button{
 
-padding:14px;
-font-size:15px;
+padding:8px;
+font-size:8px;
+width:70%;
+
 
 }
 
